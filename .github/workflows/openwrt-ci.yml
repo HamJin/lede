@@ -10,13 +10,15 @@
 name: OpenWrt-CI 
 
 on:
-  push:
-    branches: 
-      - master
-  schedule:
-     - cron: 20 00 * * *
-  release:
-     types: [published]
+  watch:
+    types: [started]
+#  push:
+#    branches: 
+#      - master
+#  schedule:
+#     - cron: 20 00 * * *
+#  release:
+#     types: [published]
 
 jobs:
 
@@ -67,13 +69,13 @@ jobs:
 
       - name: Make download
         run: |
-          make download V=s
+          make download -j 8
           find ./dl/ -size -1024c -exec rm -f {} \;
           df -h
 
       - name: Compile firmware
         run: |
-          make V=s
+          make -j4
           echo "======================="
           echo "Space usage:"
           echo "======================="
