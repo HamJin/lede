@@ -77,7 +77,7 @@ jobs:
 
       - name: Compile firmware
         run: |
-          make defconfig
+          #make defconfig
           make -j2
           echo "======================="
           echo "Space usage:"
